@@ -2,19 +2,15 @@ import React from 'react'
 import Footer from './Footer'
 import Header from "./Header"
 import Note from "./Note"
-import notes from '../notes'
+
+import { CreateNote } from './CreateNote'
 
 const App = () => {
   return (
     <>
      <Header/>
-      {
-        notes.map((note) => {
-          return (
-            <Note title={note.title} content={note.content}/>
-          )
-        })
-      }
+     <CreateNote/>
+     <Note title={"Note Title"} content={"Notes content"}/>
      <Footer/>
     </>
    
