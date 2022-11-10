@@ -8,7 +8,7 @@ const Footer = () => {
 
   return (
     <footer>
-       <p> Made with 💚 copywrite © {date.getFullYear()}</p>
+       <p> Made with 💚by MTouthang copywrite © {date.getFullYear()}</p>
     </footer>
    
   )
