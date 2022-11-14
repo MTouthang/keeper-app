@@ -1,61 +1,58 @@
 import React, {useState} from 'react'
 
 
-const CreateNote = ({notes, setNotes}) => {
+const CreateNote = ({onAdd}) => {
 
-  
+  /** constant to track of title and content*/
+  const [note, setNote] = useState({
+    title: "",  
+    content: ""
+  })
 
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  // const [note, setNote] = useState({
-  //   title: "",  
-  //   content: ""
-  // })
+  // handling the change value of title and content
+  const handleChange = (event) => {
+    const {name, value} = event.target
+    // setNote({
+    //     ...note,
+    //     [name]: value
+    // } )
 
-  // const handleChange = (event) => {
-  //   // const {name, value} = event.target
-  //   // setNote({
-  //   //     ...note,
-  //   //     [name]: value
-    
-
-  //   // } )
-
-    // setTitle(event.target.title)
-    
+    setNote(prevNote => {
+      return {
+        ...prevNote,
+        [name]: value
+      }
+    })
    
-  // }
-  
-  const handleAddButton = (event) => {
-    event.preventDefault()
-    setNotes([...notes, {title, content}])
-  //  notes.push(note)
-    console.log(notes)
-  
-   setTitle("")
-   setContent("")
-  
   }
   
-  
-  
+ /** Pass the new note back to the app */
+  const submitNote = (event) => {
+    event.preventDefault()
+    onAdd(note)
+    setNote({
+      title:"",
+      content: ""
+    })
+  }
   return (
     <div>
          <form>
             <input 
             type="text" 
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={handleChange}
             name="title"
-            value={title}
+            value={note.title}
             placeholder='Title' />
                 
             <textarea 
+            type="text"
             name="content" 
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            value={note.content}
+            onChange={handleChange}
             placeholder='Take a note...' 
             rows="3"/>
-            <button onClick={handleAddButton}>Add</button>
+            <button onClick={submitNote}>Add</button>
             </form>
     </div>
   )
