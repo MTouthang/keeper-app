@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { notesContext } from '../context/notesContext'
 
 
-const Note = ({title, content, onDelete, id}) => {
+const Note = ({id, note}) => {
 
-  const handleDelete = (event) => {
-    // event.preventDefault()
-    onDelete(id)
+  const {noteDelete} = useContext(notesContext)
+  const handleDelete = () => {
+   
+    noteDelete(id)
   }
   return (
   <>
       <div className='note'>
-      <h1> {title}</h1>
-      <p> {content}</p>
+      <h1> {note.title}</h1>
+      <p> {note.content}</p>
       <button onClick={handleDelete}>Delete</button>
     </div>
   </>

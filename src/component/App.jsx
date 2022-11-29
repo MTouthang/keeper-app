@@ -4,14 +4,11 @@ import Header from "./Header"
 import Note from "./Note"
 
 import CreateNote  from './CreateNote'
-
-
+import { notesContext } from '../context/notesContext'
 
 const App = () => {
-  
-
+  console.log(`notes context: ${notesContext}`)
   const [notes, setNotes] = useState([])
-
   /** note add function -- */
   function addNote(note){
     setNotes(prevNotes => {
@@ -30,19 +27,21 @@ const App = () => {
       })
     })
   }
-
   return (
     <>
      <Header/>
-     <CreateNote onAdd={addNote}/>
-     {
+     <notesContext.Provider value={{notes, setNotes, addNote,noteDelete }}>
+        <CreateNote/>
+        {
       notes.map((note, index) => {
         return (
-          <Note id={index} key={index}
-          notes={notes} onDelete={noteDelete} title={note.title} content={note.content} />
+          <Note id={index} key={index} note={note}
+          />
         )
       })
      }
+     </notesContext.Provider>
+    
     
      <Footer/>
     </>

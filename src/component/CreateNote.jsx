@@ -1,9 +1,12 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
+import { notesContext } from '../context/notesContext'
 
 
-const CreateNote = ({onAdd}) => {
+const CreateNote = () => {
 
   /** constant to track of title and content*/
+
+  const {addNote} = useContext(notesContext)
   const [note, setNote] = useState({
     title: "",  
     content: ""
@@ -29,7 +32,7 @@ const CreateNote = ({onAdd}) => {
  /** Pass the new note back to the app */
   const submitNote = (event) => {
     event.preventDefault()
-    onAdd(note)
+    addNote(note)
     setNote({
       title:"",
       content: ""
